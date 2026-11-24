@@ -28,3 +28,8 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Application architecture
+- Keep this explicitly requested scrolling demo at `/` with in-page section links; candidate and employer modes share the same sprint data.
+- Keep demo applications in React session state and deterministic sprint plans in a browser-safe data module; no real applications are transmitted or stored.
+- Centralize brand styling in global semantic tokens and control variants so the page remains visually consistent.
