@@ -33,3 +33,4 @@ use the editor.
 - Keep this explicitly requested scrolling demo at `/` with in-page section links; candidate and employer modes share the same sprint data.
 - Keep demo applications in React session state and deterministic sprint plans in a browser-safe data module; no real applications are transmitted or stored.
 - Centralize brand styling in global semantic tokens and control variants so the page remains visually consistent.
+- Generate certificate downloads synchronously as vector PDFs with jsPDF and colors resolved from global tokens; this avoids print dialogs, screenshot color incompatibilities, and delayed browser download activation.
