@@ -1,8 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { ArrowDown, ArrowRight, Award, BadgeCheck, BriefcaseBusiness, Check, CheckCircle2, Clock3, Code2, Database, Globe2, HeartHandshake, Leaf, LockKeyhole, ShieldCheck, Sparkles, UserRound, UsersRound, Wallet, Zap } from "lucide-react";
+import { ArrowDown, ArrowRight, Award, BadgeCheck, BriefcaseBusiness, Check, CheckCircle2, Clock3, Code2, Database, Globe2, HeartHandshake, Leaf, LockKeyhole, Menu, ShieldCheck, Sparkles, UserRound, UsersRound, Wallet, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { ApplicationModal } from "@/components/application-modal";
 import { ReferenceVault } from "@/components/reference-vault";
 import { categories, filterSprints, type Application, type Category, type Sprint } from "@/lib/sprints";
@@ -23,6 +24,7 @@ export const Route = createFileRoute("/")({
 const categoryIcons = { Tech: Code2, Data: Database, Finance: Wallet, Operations: Globe2 };
 function Index() {
   const [mode, setMode] = useState<"candidate" | "employer">("candidate");
+  const [menuOpen, setMenuOpen] = useState(false);
   const [category, setCategory] = useState<Category>("All");
   const [selectedSprint, setSelectedSprint] = useState<Sprint | null>(null);
   const [reviewSprint, setReviewSprint] = useState<Sprint | null>(null);
@@ -33,7 +35,8 @@ function Index() {
     <header className="site-header"><div className="page-container h-full flex items-center justify-between gap-4">
       <a href="#" className="brand" aria-label="Micro-Sprint home"><Zap className="brand-mark" strokeWidth={2.4} fill="currentColor" /><span>Micro<span className="text-primary">-</span>Sprint<span className="text-primary">.</span></span></a>
       <nav className="nav-links" aria-label="Main navigation"><a href="#how-it-works">How It Works</a><a href="#live-sprints">Live Sprints</a><a href="#reference-vault">Reference Vault</a></nav>
-      <div><p className="demo-label flex items-center gap-1.5"><span className="size-1.5 rounded-full bg-primary" /> Anonymous Demo Mode</p><div className="mode-switch" role="group" aria-label="Anonymous demo view"><Button variant={mode === "candidate" ? "mode" : "modeInactive"} aria-pressed={mode === "candidate"} onClick={() => setMode("candidate")}><UserRound /> Candidate</Button><Button variant={mode === "employer" ? "mode" : "modeInactive"} aria-pressed={mode === "employer"} onClick={() => setMode("employer")}><BriefcaseBusiness /> Employer</Button></div></div>
+      <div className="desktop-mode"><p className="demo-label flex items-center gap-1.5"><span className="size-1.5 rounded-full bg-primary" /> Anonymous Demo Mode</p><div className="mode-switch" role="group" aria-label="Anonymous demo view"><Button variant={mode === "candidate" ? "mode" : "modeInactive"} aria-pressed={mode === "candidate"} onClick={() => setMode("candidate")}><UserRound /> Candidate</Button><Button variant={mode === "employer" ? "mode" : "modeInactive"} aria-pressed={mode === "employer"} onClick={() => setMode("employer")}><BriefcaseBusiness /> Employer</Button></div></div>
+      <Sheet open={menuOpen} onOpenChange={setMenuOpen}><SheetTrigger asChild><Button variant="outline" size="icon" className="mobile-menu-trigger" aria-label="Open menu"><Menu /></Button></SheetTrigger><SheetContent side="right" className="w-[280px]"><SheetHeader><SheetTitle>Menu</SheetTitle></SheetHeader><nav className="mobile-nav px-4" aria-label="Mobile navigation">{[["#how-it-works","How It Works"],["#live-sprints","Live Sprints"],["#reference-vault","Reference Vault"]].map(([h,l]) => <a key={h} href={h} onClick={() => setMenuOpen(false)}>{l}</a>)}</nav><div className="px-4 mt-4"><p className="demo-label flex items-center gap-1.5"><span className="size-1.5 rounded-full bg-primary" /> Anonymous Demo Mode</p><div className="mode-switch" role="group" aria-label="Anonymous demo view (mobile)"><Button className="flex-1" variant={mode === "candidate" ? "mode" : "modeInactive"} aria-pressed={mode === "candidate"} onClick={() => { setMode("candidate"); setMenuOpen(false); }}><UserRound /> Candidate</Button><Button className="flex-1" variant={mode === "employer" ? "mode" : "modeInactive"} aria-pressed={mode === "employer"} onClick={() => { setMode("employer"); setMenuOpen(false); }}><BriefcaseBusiness /> Employer</Button></div></div></SheetContent></Sheet>
     </div></header>
     <main>
       <section className="hero"><img className="hero-photo" src={teamAsset.url} alt="A diverse team of professionals collaborating on a laptop in a coworking space" fetchPriority="high" /><div className="page-container hero-content">
