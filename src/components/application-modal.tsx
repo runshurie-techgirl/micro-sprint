@@ -2,7 +2,7 @@ import { useState } from "react";
 import { ArrowRight, Check, CircleCheck, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { makeApplication, type Application, type Sprint } from "@/lib/sprints";
+import { experienceLevels, makeApplication, type Application, type Sprint } from "@/lib/sprints";
 
 export function ApplicationModal({ sprint, existing, onClose, onSubmit }: { sprint: Sprint; existing: Application | undefined; onClose: () => void; onSubmit: (application: Application) => void }) {
   const [skills, setSkills] = useState<string[]>([]);
@@ -29,9 +29,9 @@ export function ApplicationModal({ sprint, existing, onClose, onSubmit }: { spri
         <Button className="w-full" onClick={onClose}>Back to micro-sprints <ArrowRight /></Button>
       </div> : <form onSubmit={submit} className="space-y-5">
         <fieldset><legend className="form-label">Your core skills</legend><div className="flex flex-wrap gap-2">{sprint.skills.map(skill => <Button type="button" aria-pressed={skills.includes(skill)} key={skill} variant={skills.includes(skill) ? "filterActive" : "filter"} onClick={() => { setError(""); setSkills(prev => prev.includes(skill) ? prev.filter(s => s !== skill) : [...prev, skill]); }}>{skills.includes(skill) && <Check size={12} />}{skill}</Button>)}</div></fieldset>
-        <div><label className="form-label" htmlFor="experience">Years of professional experience</label><select id="experience" className="experience-select" value={experience} onChange={event => { setExperience(event.target.value); setError(""); }} required><option value="" disabled>Select your experience</option>{["0–1 years", "2–3 years", "4–6 years", "7+ years"].map(value => <option key={value}>{value}</option>)}</select></div>
+        <div><label className="form-label" htmlFor="experience">Years of professional experience</label><select id="experience" className="experience-select" value={experience} onChange={event => { setExperience(event.target.value); setError(""); }} required><option value="" disabled>Select your experience</option>{experienceLevels.map(value => <option key={value}>{value}</option>)}</select></div>
         {error && <p role="alert" className="text-sm text-destructive">{error}</p>}
-        <Button type="submit" className="w-full h-11">Generate ID & sprint plan <ArrowRight /></Button>
+        <Button type="submit" className="w-full h-11">Generate My Talent ID <ArrowRight /></Button>
         <p className="text-center text-xs text-muted-foreground">Your experience matters. Your personal details stay yours.</p>
       </form>}
     </DialogContent>

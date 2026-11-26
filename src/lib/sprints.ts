@@ -18,9 +18,10 @@ export const sprints: Sprint[] = [
 ];
 export function filterSprints(category: Category) { return category === "All" ? sprints : sprints.filter(s => s.category === category); }
 export function createTalentId() { return `Talent #KE-${crypto.randomUUID().slice(0, 8).toUpperCase()}`; }
+export const experienceLevels = ["0–1 years", "2–4 years", "5+ years"];
 export function makeApplication(sprint: Sprint, skills: string[], experience: string) {
   if (!skills.length || !skills.every(skill => sprint.skills.includes(skill))) throw new Error("Select at least one relevant skill.");
-  if (!["0–1 years", "2–3 years", "4–6 years", "7+ years"].includes(experience)) throw new Error("Select your experience.");
+  if (!experienceLevels.includes(experience)) throw new Error("Select your experience.");
   return { talentId: createTalentId(), sprintId: sprint.id, skills, experience, plan: sprint.plan };
 }
 export type Application = ReturnType<typeof makeApplication>;

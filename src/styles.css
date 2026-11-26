@@ -265,3 +265,60 @@ h1,h2,h3,h4 { font-family: var(--font-display); letter-spacing: 0; }
   .desktop-mode { display: none; }
   .mobile-menu-trigger { display: inline-flex; }
 }
+
+/* Compact home + three-dots menu layout */
+body { font-size: 16px; }
+.site-header { height: 60px; background: var(--navy); color: var(--on-navy); border-bottom: none; }
+.site-header .brand { font-size: 19px; color: var(--on-navy); }
+.site-header .brand-mark { width: 24px; height: 24px; color: var(--emerald-bright); }
+.demo-pill { display: flex; align-items: center; gap: 8px; }
+.demo-pill .demo-label { margin: 0; font-size: 10px; color: color-mix(in oklch, var(--on-navy) 70%, transparent); }
+.site-header .mode-switch { border-radius: 999px; padding: 2px; }
+.site-header .mode-switch button { border-radius: 999px; height: 30px; padding-inline: 12px; font-size: 12px; }
+.site-menu { position: relative; }
+.dots-button { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 12px; color: var(--on-navy); }
+.dots-button:hover, .dots-button[aria-expanded="true"] { background: color-mix(in oklch, var(--on-navy) 12%, transparent); }
+.menu-backdrop { display: none; }
+.menu-panel { position: absolute; right: 0; top: calc(100% + 8px); width: 250px; padding: 8px; background: var(--background); color: var(--foreground); border-radius: 14px; box-shadow: var(--soft-shadow), 0 12px 32px color-mix(in oklch, var(--navy) 18%, transparent); z-index: 60; opacity: 0; transform: translateY(-6px); pointer-events: none; transition: opacity 200ms ease, transform 200ms ease; }
+.menu-panel.is-open { opacity: 1; transform: none; pointer-events: auto; }
+.menu-item { display: flex; width: 100%; align-items: center; gap: 12px; min-height: 44px; padding-inline: 12px; border-radius: 10px; font-size: 15px; font-weight: 500; text-align: left; }
+.menu-item:hover { background: var(--muted); }
+.menu-item.is-active { background: var(--accent); color: var(--primary); font-weight: 650; }
+.hero { min-height: 0; }
+.hero::after { display: none; }
+.hero-content { padding-block: 28px 24px; }
+.hero h1 { font-size: 36px; margin: 0 0 10px; max-width: 720px; }
+.hero-copy { max-width: 620px; font-size: 16px; line-height: 1.55; }
+.section { padding-block: 20px 24px; }
+.section-heading { font-size: 24px; margin-top: 0; }
+.section-copy { font-size: 16px; margin-top: 4px; }
+.filter-row { margin-block: 14px; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
+.filter-row button { flex-shrink: 0; }
+.sprint-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+.sprint-card { border-radius: 14px; padding: 18px; gap: 4px; }
+.sprint-card h3 { font-size: 17px; margin-top: 10px; }
+.sprint-meta { font-size: 14px; padding-block: 10px 14px; }
+.steps { grid-template-columns: 1fr; gap: 12px; margin-top: 4px; }
+.step-card { border-radius: 14px; padding: 18px; }
+.step-card p { font-size: 15px; }
+.vault-stack { display: grid; gap: 16px; }
+.certificate { border-radius: 14px; padding: 16px; }
+.certificate-title { font-size: 19px; }
+.application-dialog { border-radius: 16px; }
+@media (max-width: 740px) {
+  .site-header { height: 60px; }
+  .demo-pill .demo-label { display: none; }
+  .site-header .mode-switch button { padding-inline: 9px; font-size: 11px; }
+  .hero h1 { font-size: 28px; }
+  .hero-content { padding-block: 22px 20px; }
+  .sprint-grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px; margin-inline: -18px; padding-inline: 18px; padding-bottom: 6px; scrollbar-width: none; }
+  .sprint-card { flex: 0 0 82%; scroll-snap-align: start; padding: 16px; }
+  .menu-backdrop { display: block; position: fixed; inset: 0; background: color-mix(in oklch, var(--navy) 45%, transparent); opacity: 0; pointer-events: none; transition: opacity 200ms ease; z-index: 59; }
+  .menu-backdrop.is-open { opacity: 1; pointer-events: auto; }
+  .menu-panel { position: fixed; top: 0; right: 0; bottom: 0; width: min(290px, 85vw); padding: 72px 10px 16px; border-radius: 16px 0 0 16px; transform: translateX(100%); opacity: 1; }
+  .menu-panel.is-open { transform: none; }
+}
+@media (max-width: 480px) {
+  .application-dialog { width: 100%; max-width: 100%; height: 100dvh; max-height: 100dvh; border-radius: 0; }
+}
+.site-header .brand { white-space: nowrap; } @media (max-width: 400px) { .site-header .brand { font-size: 17px; } }
